@@ -1,0 +1,19 @@
+{
+  "name": "startup_financing_webapp",
+  "version": "1.0.0",
+  "description": "Utility for both investors and entrepreneurs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "startup"
+  ],
+  "author": "Aniket",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "handlebars": "^4.0.11"
+  }
+}
