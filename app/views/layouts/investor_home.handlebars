@@ -9,15 +9,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
     <link rel="shortcut icon" href="/custom.ico" type="image/x-icon" />
     <script src="main.js"></script>
+
 </head>
 <!-- This webpage belongs to the signed in Investor -->
 <body class="logged-in investor">
     {{>user_header}}
     {{>investor_sidenav}}
-
       <div id="main">
         <span id="user-menu" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
     
       </div>
+      {{{body}}}
 </body>
 </html>

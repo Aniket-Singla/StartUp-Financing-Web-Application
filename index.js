@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //var methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
-//var log = require("loglevel");
+const logger = require('morgan');
 const path = require("path");
 const indexRouter = require(path.join(__dirname,'app','routes','index'))
 
@@ -21,90 +21,10 @@ console.log('process.env.NODE_ENV (in server.js) = ' + process.env.NODE_ENV);
 var app = express();
 var port = process.env.PORT || 8080;
 
-//database
-const Pool = require('pg').Pool;
-var crypto = require('crypto');
-var session = require('express-session');
-app.use(session(
-    {
-        secret : 'this is top secret',
-        cookie : {maxAge : 1000 * 60 * 60* 24 * 30},
-        saveUninitialized: true
-    }));
-var config={
-     user: 'postgres',
-  host: 'localhost',
-  database: 'test_startup',
-  password: 'AniketSingla',
-  port: 5432,
-};
-var pool = new Pool(config);
-function hash(input,salt){
-  var result = crypto.pbkdf2Sync(input,salt,1000,512,'sha512')
 
-  return [salt,1000,result.toString('hex')].join('$');
-
-}
-app.get('/dbtest',(req,resp)=>{
-  pool.query('SELECT * FROM user',(err,result)=>{
-    if(err){
-      resp.send(err.toString());
-    }
-    else{
-      resp.send(JSON.stringify(result));
-    }
-  });
-})
-app.post('/createuser',(req,res)=>{
-	var salt = crypto.randomBytes(128).toString('hex');
-	var username = req.body.username;
-	var role = req.body.role;
-	var password = req.body.password;
-	var dbString = hash(password,salt);
-	pool.query('INSERT INTO "user" (username,role,password) VALUES ($1,$2,$3)',[username,role,dbString],(err,result)=>{
-	    if(err){
-	            res.send(err.toString());
-	        }
-	        else{
-	          res.status(200).send('User created Successfully with username ' + username);
-	    }
-	});
-});
-app.post('/login', function (req, res) {
-   var username = req.body.username;
-   var password = req.body.password;
-   
-   pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result) {
-      if (err) {
-          res.status(500).send(err.toString());
-      } else {
-          if (result.rows.length === 0) {
-              res.status(403).send('username/password is invalid');
-          } else {
-              // Match the password
-              var dbString = result.rows[0].password;
-              var salt = dbString.split('$')[0];
-              var hashedPassword = hash(password, salt); // Creating a hash based on the password submitted and the original salt
-              if (hashedPassword === dbString) {
-                
-                req.session.auth = {userId : result.rows[0].id};
-              
-                res.send('credentials correct!');
-                
-              } else {
-                res.status(403).send('username/password is invalid');
-              }
-          }
-      }
-   });
-});
-
-// Requiring our models for syncing
-//var db = require(path.join(__dirname, '/models'));
-
-// Serve static content for the app from the 'public' directory
 app.use(express.static(process.cwd() + '/public'));
-
+// Morgarn logger
+app.use(logger('dev'));
 // Override with POST having ?_method=PUT
 //app.use(methodOverride('_method'));
 
@@ -122,22 +42,12 @@ app.engine('handlebars', exphbs({
   	layoutsDir: path.join(__dirname ,'app','/views/layouts') }));
 app.set('view engine', 'handlebars');
 
+//routing 
+app.use('/',indexRouter);
+//app.use('/api',)
 // get requests
-app.get('/',(req,res)=>{
-	res.render('home',{title:"Aniket"});
-});
-app.get('/login',(req,res)=>{
-	res.sendFile(path.join(__dirname,'public','login.html'));
-});
-app.get('/signup',(req,res)=>{
-	res.sendFile(path.join(__dirname,'public','signup.html'));
-});
-app.get('/investors',(req,res)=>{
-	res.render('investor',{layout:'investor_home'});
-});
-app.get('/entrepreneurs',(req,res)=>{
-	res.render('entrepreneurs',{layout:'entrepreneur'});
-});
+
+
 // Import routes and give the server access to them
 //require('./controllers/burgers_controller.js')(app);
 
