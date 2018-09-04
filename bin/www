@@ -4,30 +4,36 @@
  * Module dependencies.
  */
 
-var app = require('../index');
+const app = require('../index');
+const path = require('path');
 //var debug = require('debug')('exp-exp2:server');
-var http = require('http');
-
+//var http = require('http');
+// Requiring our models for syncing
+var db = require(path.join(__dirname,'../app', 'models'));
 /**
  * Get port from environment and store in Express.
  */
 
-var port = process.env.PORT || '3000';
+var port = process.env.PORT || '80';
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
-
+//var server = http.createServer(app);
+// Syncing our sequelize models and then starting our express app
+// Include the {force: true} parameter if you need to update the models
+db.sequelize.sync().then(function() {
+  app.listen(port, function() {
+    console.log("Startup Management webapp is listening on PORT " + port);
+  });
+});
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, function () {
-  console.log(`Startup Financing Webapp listening on port ${port}!`);
-});
+
 // server.on('error', onError);
 // server.on('listening', onListening);
 

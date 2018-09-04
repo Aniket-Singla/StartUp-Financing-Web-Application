@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const path = require("path");
+
 const indexRouter = require(path.join(__dirname,'app','routes','index'))
+
 
 // Configure logging
 console.log('process.env.NODE_ENV (in server.js) = ' + process.env.NODE_ENV);
@@ -51,12 +53,7 @@ app.use('/',indexRouter);
 // Import routes and give the server access to them
 //require('./controllers/burgers_controller.js')(app);
 
-// Syncing our sequelize models and then starting our express app
-// Include the {force: true} parameter if you need to update the models
-/* db.sequelize.sync().then(function() {
-  app.listen(port, function() {
-    console.log("My-Burger-Sequel is listening on PORT " + port);
-  });
-});
- */
+// Syncing our sequelize models and then starting our express app in bin/ www
+
+
  module.exports = app;
