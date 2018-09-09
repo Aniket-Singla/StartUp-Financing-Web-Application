@@ -1,3 +1,8 @@
+{{#if errors}}
+	{{#each errors}}
+	<div class="alert alert-danger">{{msg}}</div>
+	{{/each}}
+{{/if}}
 <form action="createUser" method="post">      
 		<input type= "text/html" placeholder = "username" id = "username" name="username" >
 		<input type= "text/html" placeholder = "email" id = "email" name="email">

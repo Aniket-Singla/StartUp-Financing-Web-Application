@@ -3,16 +3,29 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Startup Financing</title>
+    <title> {{>title}} StartUp Financing Webapp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    {{#each css}}
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/{{this}}" />
+    {{/each}}
+    {{!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /> --}}
     <link rel="shortcut icon" href="/custom.ico" type="image/x-icon" />
     <script src="public/main.js"></script>
 </head>
 <!-- This webpage belongs to the signed in Entrepreneur -->
 <body class="logged-out">
   {{>guest_header}}
+  {{#if success_msg}}
+    <div>{{success_msg}}</div>
+  {{/if}}
+  {{#if error_msg}}
+    <div>{{error_msg}}</div>
+  {{/if}}
+  {{#if error}}
+    <div>{{error}}</div>
+  {{/if}}
   {{{body}}}
+  
 </body>
 </html>
