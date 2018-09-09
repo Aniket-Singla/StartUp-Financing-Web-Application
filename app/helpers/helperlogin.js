@@ -169,7 +169,8 @@ passport.deserializeUser(async function(id, done) {
 })
 exports.authenticate = passport.authenticate('local',{
   successRedirect : '/',
-  failureRedirect : '/users/login'
+  failureRedirect : '/users/login',
+  failureFlash : true
 })
 function isLoggedIn(req, res, next) {
 
@@ -186,3 +187,19 @@ exports.logout = (req, res) => {
     })
 }
 
+exports.logoutUser = function (req, res) {
+  req.logout();
+
+  req.flash('success_msg', 'You are logged out');
+
+  res.redirect('/users/login');
+}
+
+exports.ensureAuthenticated = function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    //req.flash('error_msg','You are not logged in');
+    res.redirect('/users/login');
+  }
+}

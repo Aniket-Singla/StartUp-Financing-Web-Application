@@ -16,16 +16,26 @@
 <!-- This webpage belongs to the signed in Entrepreneur -->
 <body class="logged-out">
   {{>guest_header}}
-  {{#if success_msg}}
-    <div>{{success_msg}}</div>
-  {{/if}}
-  {{#if error_msg}}
-    <div>{{error_msg}}</div>
-  {{/if}}
-  {{#if error}}
-    <div>{{error}}</div>
-  {{/if}}
-  {{{body}}}
+        <div class="row">
+        <div class="col-lg-12">
+          {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}
+          
+          {{{body}}}
+        </div>
+
+        
+</div>
+  
   
 </body>
 </html>

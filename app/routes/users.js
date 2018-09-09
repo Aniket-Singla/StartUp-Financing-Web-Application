@@ -16,6 +16,7 @@ router.post('/login',helper.authenticate,
 	})
 router.get('/createUser',helper.signupGet);
 router.post('/createUser',helper.createUser);
+router.get('/logout', helper.logoutUser);
 
 
 
