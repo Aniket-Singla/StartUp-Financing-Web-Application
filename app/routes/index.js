@@ -5,7 +5,7 @@ var router = express.Router();
 var helper = require(path.join(__dirname,'../helpers/helperlogin'))
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('home',{ title: 'Home', css: ['main.css'] });
+  res.render('home',{ port:3000,title: 'Home', css: ['main.css'] });
 });
 
 router.get('/investors',helper.ensureAuthenticated,(req,res)=>{

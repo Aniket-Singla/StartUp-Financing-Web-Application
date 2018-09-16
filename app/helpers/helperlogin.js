@@ -20,28 +20,20 @@ function hash(input,salt){
 //     }    
 // };
 
-/**
- * POST /auth/emailconfirmation
- */
 
-exports.emailValidation = [
-    check('email')
-        .isEmail()
-        .withMessage('must be an email')
-]
 /**
  * GET /login
  */
 
 exports.loginGet = (req, res) => {
-    res.render('login',{title:"Login",css: ['main.css']});
+    res.render('login',{port:process.env.PORT,title:"Login",css: ['main.css']});
 }
 /**
  * GET /signup
  */
 
 exports.signupGet = (req, res) => {
-    res.render('signup',{title:"Create User",css: ['main.css']});
+    res.render('signup',{port:process.env.PORT,title:"Create User",css: ['main.css']});
 }
 exports.createUser = function(req,res,next){
   var username = req.body.username;
@@ -52,7 +44,7 @@ exports.createUser = function(req,res,next){
   req.checkBody('password','password cannot be empty').notEmpty();
   var errors =   req.validationErrors();
   if(errors){
-    res.render('signup',{title:'Signup',errors:errors,css:['main.css']})
+    res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors,css:['main.css']})
   }
   else{
     var salt = crypto.randomBytes(128).toString('hex');

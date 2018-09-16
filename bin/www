@@ -6,6 +6,7 @@
 
 const app = require('../index');
 const path = require('path');
+require('dotenv').config();
 //var debug = require('debug')('exp-exp2:server');
 //var http = require('http');
 // Requiring our models for syncing
@@ -15,6 +16,7 @@ var db = require(path.join(__dirname,'../app', 'models'));
  */
 
 var port = process.env.PORT || '80';
+console.log(port)
 app.set('port', port);
 
 /**

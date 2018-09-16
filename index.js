@@ -2,34 +2,54 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const path = require("path");
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+//for extracing env variables
+require('dotenv').config();
+const env = process.env.NODE_ENV || 'development';
+const config = require("./app/config/config")[env];
+
 //var methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
-const path = require("path");
-
+const Sequelize = require('Sequelize');
 const indexRouter = require(path.join(__dirname,'app','routes','index'));
 const usersRouter = require(path.join(__dirname,'app','routes','users'))
 
 
 // Configure logging
 console.log('process.env.NODE_ENV (in server.js) = ' + process.env.NODE_ENV);
-/* if (process.env.NODE_ENV) { // Production
-	console.log("Setting log level to ERROR");
-	log.setLevel("ERROR");
-} else { // Development
-	var level = process.env.LOG_LEVEL || "DEBUG";
-	console.log("Setting log level to " + level);
-	log.setLevel(level);
-} */
+
+
 // Set up Express Application
 var app = express();
 var port = process.env.PORT || 8080;
+// development error handler
+// will print stacktrace
+if (env === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        console.log('indev')
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
 
-
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 app.use(express.static(process.cwd() + '/public'));
 // Morgarn logger
 app.use(logger('dev'));
@@ -46,10 +66,14 @@ app.use(express.static(path.join(__dirname,'app/views')));
 //purposely not designed for a production environment. 
 //It will leak memory under most conditions, does not scale past a single process, 
 //and is meant for debugging and developing.
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
 app.use(session({
   secret: 'random string',
   resave: false,
   saveUninitialized: false,
+  store: new SequelizeStore({
+    db : sequelize
+  }),
   //cookie: { secure: true }
 }));
 // init passport
