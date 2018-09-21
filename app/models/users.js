@@ -25,7 +25,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull:false
     },
    
-  })
+  },{
+    hooks: {
+      beforeCreate: (user) => {
+        const salt = bcrypt.genSaltSync();
+        user.password = bcrypt.hashSync(user.password, salt);
+      }
+    },
+      
+})
   {
     Users.associate = function(models){
       Users.hasOne(models.UserInfo,{
@@ -35,17 +43,10 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
   };
- /*Users.beforeCreate((user, options) => new Promise((resolve, reject) => {
-      const { password } = user;
-      bcrypt.genSalt(10, (err, salt) => {
-        if (err) reject(err);
-        bcrypt.hash(password, salt, null, (error, hash) => {
-          if (error) reject(err);
-          user.password = hash;
-          resolve(user);
-        });
-      });
-    }));
+  Users.prototype.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+  };
+ /*
   Users.beforeBulkUpdate((user, options) => new Promise((resolve, reject) => {
     const { password } = user.attributes;
     bcrypt.genSalt(10, (err, salt) => {
@@ -57,10 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     });
   }));
-  Users.prototype.comparePassword = function (candidatePassword, done) {
-    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-      done(err, isMatch);
-    });
+  
   };*/
   return Users;
 }

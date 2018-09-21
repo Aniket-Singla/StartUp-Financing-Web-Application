@@ -4,15 +4,7 @@ const { check, validationResult } = require('express-validator/check');
 const Op = require("sequelize").Op;
 const db = require(path.join(__dirname,'../models/index'));
 const Users = db.Users;
-const crypto = require('crypto');
 
-
-function hash(input,salt){
-  var result = crypto.pbkdf2Sync(input,salt,1000,512,'sha512')
-
-  return [salt,1000,result.toString('hex')].join('$');
-
-}
 
 /**
  * GET /signup
@@ -36,10 +28,9 @@ exports.createUser = function(req,res,next){
     res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors,css:['main.css']})
   }
   else{
-    var salt = crypto.randomBytes(128).toString('hex');
-    var dbString = hash(password,salt);
+    
     Users
-    .build({userName:username,email:email,password:dbString})
+    .build({userName:username,email:email,password:password})
     .save()
     .then(user=>{
       req.login(user, err => {
@@ -64,18 +55,7 @@ exports.createUser = function(req,res,next){
 }
 
 
-exports.validPassword =function validPassword(user,password){
-  var dbString = user.password;
-          var salt = dbString.split('$')[0];
-          var hashedPassword = hash(password, salt); // Creating a hash based on the password submitted and the original salt
-          if (hashedPassword === dbString) {
-            
-            //req.session.auth = {userId : result.rows[0].id};
-          
-          return true;
-          }
-          else return false;
-}
+
 /**
  * GET /login
  */

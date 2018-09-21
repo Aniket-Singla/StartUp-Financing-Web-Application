@@ -3,7 +3,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const db = require(path.join(__dirname,'../models/index'));
 const Users = db.Users;
-var helper = require(path.join(__dirname,'../helpers/helperlogin'));
 passport.serializeUser(function(user, done) {
   console.log('in serializeUser')
   done(null, user.id);
@@ -32,7 +31,7 @@ passport.use(new LocalStrategy(
         if (!user) {
           return done(null, false, { message: 'user not found' });
         }
-        if (!helper.validPassword(user,password)) {
+        if (!user.validPassword(password)) {
         console.log('wrond password')
         return done(null, false, { message: 'Incorrect password.' });
       	}
