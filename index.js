@@ -5,20 +5,20 @@ const session = require('express-session');
 const path = require("path");
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
+//const localStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 //for extracing env variables
 require('dotenv').config();
 const env = process.env.NODE_ENV || 'development';
-const config = require("./app/config/config")[env];
 
 //var methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
-const Sequelize = require('Sequelize');
+const db = require(path.join(__dirname,'app/models/index'));
 const indexRouter = require(path.join(__dirname,'app','routes','index'));
 const usersRouter = require(path.join(__dirname,'app','routes','users'))
+
 
 
 // Configure logging
@@ -66,13 +66,14 @@ app.use(express.static(path.join(__dirname,'app/views')));
 //purposely not designed for a production environment. 
 //It will leak memory under most conditions, does not scale past a single process, 
 //and is meant for debugging and developing.
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
+
 app.use(session({
   secret: 'random string',
   resave: false,
   saveUninitialized: false,
   store: new SequelizeStore({
-    db : sequelize
+    db : db.sequelize,
+    table : 'Sessions'
   }),
   //cookie: { secure: true }
 }));

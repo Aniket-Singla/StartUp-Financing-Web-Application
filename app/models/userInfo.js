@@ -22,6 +22,6 @@ module.exports = (sequelize, DataTypes) => {
 
    
   });
-
+  
   return UserInfo;
 };

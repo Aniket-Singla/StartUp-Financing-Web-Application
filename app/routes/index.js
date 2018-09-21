@@ -3,21 +3,18 @@ const path = require('path');
 
 var router = express.Router();
 var helper = require(path.join(__dirname,'../helpers/helperlogin'))
+const passportConfig = require(path.join(__dirname,'../config/passport'));
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('home',{ port:3000,title: 'Home', css: ['main.css'] });
 });
 
-router.get('/investors',helper.ensureAuthenticated,(req,res)=>{
+router.get('/investors',passportConfig.isAuthenticated,(req,res)=>{
 	res.render('investor',{layout:'investor_home'});
 });
-router.get('/entrepreneurs',helper.ensureAuthenticated,(req,res)=>{
+router.get('/entrepreneurs',passportConfig.isAuthenticated,(req,res)=>{
 	res.render('entrepreneurs',{layout:'entrepreneur'});
 		//for view with no layout {layout: false}
 });
-
-// router.get('/signup',(req,res)=>{
-// 	res.sendFile(path.join(__dirname,'public','signup.html'));
-// });
 
 module.exports = router;
