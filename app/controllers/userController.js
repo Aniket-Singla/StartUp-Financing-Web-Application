@@ -19,6 +19,7 @@ exports.createUser = function(req,res,next){
   var password = req.body.password;
   var fname = req.body.fname;
   var lname = req.body.lname;
+  var urole = req.body.role;
   var contact = req.body.contact;
   req.checkBody('username','username cannot be empty').notEmpty();
   req.checkBody('email','email is required and must be valid EMail').notEmpty().isEmail();
@@ -36,6 +37,7 @@ exports.createUser = function(req,res,next){
     User.create({
         first_name: fname,
         last_name : lname,
+        role : urole,
         contact_no : contact, 
         UserLogin: {
           userName:username,
@@ -48,9 +50,9 @@ exports.createUser = function(req,res,next){
     .then(user=>{
       console.log(user.UserLogin)
       req.login(user.UserLogin, err => {
-                console.log('in login')
+                console.log(user.role)
                 if (err) return err;
-                return res.redirect('/')
+                return res.redirect('/'+user.role+'s')
             })
       console.log('user created');
     })
@@ -60,7 +62,8 @@ exports.createUser = function(req,res,next){
                     error: ['Username or email already taken.']
                 })
             }
-      //res.send('something went wrong')
+      console.log(err)
+      res.send('something went wrong')
     })
  
   
