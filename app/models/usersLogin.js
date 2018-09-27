@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users', {
+  const UserLogins = sequelize.define('UserLogins', {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -34,33 +34,17 @@ module.exports = (sequelize, DataTypes) => {
     },
       
 })
-  {
-    Users.associate = function(models){
-      Users.hasOne(models.UserInfo,{
-          foreignKey: 'UserId',
-          onDelete: 'CASCADE',
-          //allowNull : false
-        });
-    }
-  };
-  Users.prototype.validPassword = function (password) {
+  
+  UserLogins.prototype.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
   };
- /*
-  Users.beforeBulkUpdate((user, options) => new Promise((resolve, reject) => {
-    const { password } = user.attributes;
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) reject(err);
-      bcrypt.hash(password, salt, null, (error, hash) => {
-        if (error) reject(err);
-        user.attributes.password = hash;
-        resolve(user);
-      });
-    });
-  }));
   
-  };*/
-  return Users;
+  return UserLogins;
 }
 
+
+
+//BelongsTo : foreign key  exists on the source model.
+
+//HasOne : foreign key exists on the target model.
 

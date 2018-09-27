@@ -2,17 +2,18 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const db = require(path.join(__dirname,'../models/index'));
-const Users = db.Users;
-passport.serializeUser(function(user, done) {
+const UserLogins = db.UserLogins;
+
+passport.serializeUser(function(userLogin, done) {
   console.log('in serializeUser')
-  done(null, user.id);
+  done(null, userLogin.id);
 });
 
 
 passport.deserializeUser(async function(id, done) {
     console.log('in deserializeUser')
-    Users.findById(id).then(function(user){
-                done(null, user);
+    UserLogins.findById(id).then(function(userLogin){
+                done(null, userLogin);
             }).catch(function(e){
                 done(e, false);
             });
@@ -25,17 +26,17 @@ passport.use(new LocalStrategy(
         },
   function(username, password, done) {
   
-      Users.findOne({
+      UserLogins.findOne({
         where: { userName:  username }
-      }).then((user) => {
-        if (!user) {
+      }).then((userLogin) => {
+        if (!userLogin) {
           return done(null, false, { message: 'user not found' });
         }
-        if (!user.validPassword(password)) {
+        if (!userLogin.validPassword(password)) {
         console.log('wrond password')
         return done(null, false, { message: 'Incorrect password.' });
       	}
-	      return done(null, user);
+	      return done(null, userLogin);
 	      })
 	      .catch(err=>{
 	        console.log(err);

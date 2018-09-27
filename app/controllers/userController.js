@@ -3,8 +3,8 @@ const passportConfig = require(path.join(__dirname,'../config/passport'));
 const { check, validationResult } = require('express-validator/check');
 const Op = require("sequelize").Op;
 const db = require(path.join(__dirname,'../models/index'));
-const Users = db.Users;
-
+const UserLogin = db.UserLogins;
+const User = db.Users;
 
 /**
  * GET /signup
@@ -17,26 +17,42 @@ exports.createUser = function(req,res,next){
   var username = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
+  var fname = req.body.fname;
+  var lname = req.body.lname;
+  var contact = req.body.contact;
   req.checkBody('username','username cannot be empty').notEmpty();
   req.checkBody('email','email is required and must be valid EMail').notEmpty().isEmail();
   req.checkBody('password','password cannot be empty').notEmpty();
-  //req.checkBody('fname','First name cannot be empty').notEmpty();
-  //req.checkBody('lname','Last name cannot be empty').notEmpty();
-  //req.checkBody('contact','Please provide contact no.').notEmpty();
+  req.checkBody('fname','First name cannot be empty').notEmpty();
+  req.checkBody('lname','Last name cannot be empty').notEmpty();
+  req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
   var errors =   req.validationErrors();
   if(errors){
     res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors,css:['main.css']})
   }
   else{
+   
     
-    Users
-    .build({userName:username,email:email,password:password})
-    .save()
+    User.create({
+        first_name: fname,
+        last_name : lname,
+        contact_no : contact, 
+        UserLogin: {
+          userName:username,
+          email:email,
+          password:password
+        }
+    }, {
+        include: [UserLogin]
+        })
     .then(user=>{
-      req.login(user, err => {
-                if (err) return next(err)
+      console.log(user.UserLogin)
+      req.login(user.UserLogin, err => {
+                console.log('in login')
+                if (err) return err;
                 return res.redirect('/')
             })
+      console.log('user created');
     })
     .catch(err=>{
       if (err.name === 'SequelizeUniqueConstraintError') {
@@ -44,11 +60,10 @@ exports.createUser = function(req,res,next){
                     error: ['Username or email already taken.']
                 })
             }
-      console.log(err);
-      res.send('something went wrong');
+      //res.send('something went wrong')
     })
-    
-
+ 
+  
   }
 
 

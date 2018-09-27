@@ -2,7 +2,6 @@ var express = require('express');
 const path = require('path');
 
 var router = express.Router();
-var helper = require(path.join(__dirname,'../helpers/helperlogin'))
 const passportConfig = require(path.join(__dirname,'../config/passport'));
 /* GET home page. */
 router.get('/', function(req, res) {

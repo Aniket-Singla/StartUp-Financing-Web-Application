@@ -1,6 +1,6 @@
 var express = require('express');
 const path = require('path');
-var helper = require(path.join(__dirname,'../helpers/helperlogin'));
+var userController = require(path.join(__dirname,'../controllers/userController'));
 var router = express.Router();
 
 const passportConfig = require(path.join(__dirname,'../config/passport'));
@@ -8,11 +8,11 @@ const passportConfig = require(path.join(__dirname,'../config/passport'));
 /*router.get('/aut', function(req, res, next) {
   res.send('respond with a resource');
 });*/
-router.get('/login',passportConfig.alreadyLogged,helper.loginGet);
-router.post('/login',helper.loginPost,passportConfig.authenticate);
-router.get('/createUser',helper.signupGet);
-router.post('/createUser',helper.createUser);
-router.get('/logout', helper.logoutUser);
+router.get('/login',passportConfig.alreadyLogged,userController.loginGet);
+router.post('/login',userController.loginPost,passportConfig.authenticate);
+router.get('/createUser',passportConfig.alreadyLogged,userController.signupGet);
+router.post('/createUser',userController.createUser);
+router.get('/logout', userController.logoutUser);
 
 
 
