@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
           //allowNull : false
           //foreign key is added to this model
         });
-      Users.hasOne(models.Roles);
+      //Users.hasOne(models.Business);
     }
   }
   

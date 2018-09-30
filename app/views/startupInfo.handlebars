@@ -1,0 +1,101 @@
+{{#if errors}}
+  {{#each errors}}
+  <div class="alert alert-danger">{{msg}}</div>
+  {{/each}}
+{{/if}}
+<form action="add" method="post" >
+          <div class="clearfix"></div>
+          <div class="col-sm-12">
+            
+              <label for="startup_name" class="col-sm-8 control-label required">Startup Name</label>
+              <div class="col-sm-16">
+                <input type="text" name="startup_name" class="form-control"
+                  data-ng-model="startup.name" data-ng-required="true" fill-permalink-on-blur>
+                
+              </div>
+         
+          </div>
+          <br/>
+          <!-- Stage -->
+          <div class="col-sm-12">
+            
+              <label for="startup_stage" class="col-sm-8 control-label required">Stage</label>
+              <div class="col-md-16">
+                <select name="startup_stage" id="startup_stage" class="form-control" >
+                          <option value="">Select Startup Stage</option>
+                          <option value="1">Ideation</option>
+                          <option value="2">Proof of Concept</option>
+                          <option value="3">Beta Launched</option>
+                          <option value="4">Early Revenues</option>
+                          <option value="5">Steady Revenues</option></select>
+                
+              </div>
+           
+          </div>
+          <br>
+          <!-- Startup Website URL -->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="startup_website_url" class="col-sm-8 control-label">Website Address</label>
+              <div class="col-sm-16">
+                <input type="text" name="startup_website_url" class="form-control">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Founding Year -->
+          <div class="col-sm-12">
+           
+              <label for="startup_founding_year" class="col-sm-8 control-label required">Founded In</label>
+              <input type="text" name="startup_founding_year" placeholder="year">
+              <div class="col-sm-16">
+                <div class="row">
+                  <div class="col-sm-12" style="padding-right: 2px;">
+                    <select name="startup_founding_month" id="monthpicker" class="form-control">
+                      <option value="0">January</option>
+                      <option value="1">February</option>
+                      <option value="2">March</option>
+                      <option value="3">April</option>
+                      <option value="4">May</option>
+                      <option value="5">June</option>
+                      <option value="6">July</option>
+                      <option value="7">August</option>
+                      <option value="8">September</option>
+                      <option value="9">October</option>
+                      <option value="10">November</option>
+                      <option value="11">December</option>
+                    </select>
+                    
+                  </div>
+                  <div class="col-sm-12">
+                    <input type='text' name="startup_founding_date" class="form-control"
+                           
+                           id='yearpicker' placeholder="finding date">
+                    
+                   
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+            <label for="startup_product_summary" class="col-sm-8 control-label">Product/Service Summary
+            </label>  
+            <textarea type="text" class="texttooltip form-control" rows="4" name="startup_product_summary" lv-limit-to="1000"   placeholder="provide a summary of product and services that you offer to customers">
+            </textarea>
+            </label>  
+              <br>
+            <label for="startup_team_summary" class="col-sm-8 control-label">Team Summary
+            </label>  
+            <textarea type="text" class="texttooltip form-control" rows="4" name="startup_team_summary" lv-limit-to="1000"   placeholder="provide a summary of team that you offer to customers">
+            </textarea>
+              
+              <br>
+            <label for="difference" class="col-sm-8 control-label">How are u different
+            </label>  
+            <textarea type="text" class="texttooltip form-control" rows="4" name="difference" lv-limit-to="1000"   placeholder="provide information on your competition and how you differentiate">
+            </textarea>
+             
+            <input type="submit"  value="ADD">
+
+            
+</form>

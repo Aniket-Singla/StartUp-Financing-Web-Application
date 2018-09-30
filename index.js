@@ -17,7 +17,8 @@ const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const db = require(path.join(__dirname,'app/models/index'));
 const indexRouter = require(path.join(__dirname,'app','routes','index'));
-const usersRouter = require(path.join(__dirname,'app','routes','users'))
+const usersRouter = require(path.join(__dirname,'app','routes','users'));
+const businessRouter = require(path.join(__dirname,'app','routes','business'));
 
 
 
@@ -122,6 +123,7 @@ app.set('view engine', 'handlebars');
 //routing 
 app.use('/',indexRouter);
 app.use('/users',usersRouter);
+app.use('/business',businessRouter);
 //app.use('/api',)
 // get requests
 

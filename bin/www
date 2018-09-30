@@ -28,7 +28,7 @@ if(process.env.NODE_ENV === 'development'){
 //var server = http.createServer(app);
 // Syncing our sequelize models and then starting our express app
 // Include the {force: true} parameter if you need to update the models
-db.sequelize.sync({force: forcebool}).then(function() {
+db.sequelize.sync({force: false}).then(function() {
   app.listen(port, function() {
     console.log("Startup Management webapp is listening on PORT " + port);
   });

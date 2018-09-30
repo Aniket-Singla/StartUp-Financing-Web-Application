@@ -11,33 +11,34 @@ const User = db.Users;
  */
 
 exports.signupGet = (req, res) => {
-    res.render('signup',{port:process.env.PORT,title:"Create User",css: ['main.css']});
+    res.render('signup',{port:process.env.PORT,title:"Create User",css: []});
 }
 exports.createUser = function(req,res,next){
-  var username = req.body.username;
-  var email = req.body.email;
-  var password = req.body.password;
-  var fname = req.body.fname;
-  var lname = req.body.lname;
-  var urole = req.body.role;
-  var contact = req.body.contact;
+ 
   req.checkBody('username','username cannot be empty').notEmpty();
   req.checkBody('email','email is required and must be valid EMail').notEmpty().isEmail();
   req.checkBody('password','password cannot be empty').notEmpty();
   req.checkBody('fname','First name cannot be empty').notEmpty();
   req.checkBody('lname','Last name cannot be empty').notEmpty();
+  req.checkBody('role','Please provide Your Role.').notEmpty();
   req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
   var errors =   req.validationErrors();
   if(errors){
-    res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors,css:['main.css']})
+    res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors})
   }
   else{
    
-    
+     var username = req.body.username;
+    var email = req.body.email;
+    var password = req.body.password;
+    var fname = req.body.fname;
+    var lname = req.body.lname;
+    var role = req.body.role;
+    var contact = req.body.contact;
     User.create({
         first_name: fname,
         last_name : lname,
-        role : urole,
+        role : role,
         contact_no : contact, 
         UserLogin: {
           userName:username,
@@ -58,7 +59,7 @@ exports.createUser = function(req,res,next){
     })
     .catch(err=>{
       if (err.name === 'SequelizeUniqueConstraintError') {
-                return res.render('signup', {port:process.env.PORT,title:'Signup',css:['main.css'],
+                return res.render('signup', {port:process.env.PORT,title:'Signup',
                     error: ['Username or email already taken.']
                 })
             }
@@ -80,7 +81,7 @@ exports.createUser = function(req,res,next){
 
 exports.loginGet = (req, res) => {
     if(!req.user){
-      res.render('login',{port:process.env.PORT,title:"Login",css: ['main.css']});
+      res.render('login',{port:process.env.PORT,title:"Login"});
     }
     else{
       res.redirect('/');
@@ -99,7 +100,7 @@ exports.loginPost = (req, res, next) => {
   if (errors) {
     
     //req.flash('error', { msg: errors });
-    return res.render('login',{port:process.env.PORT,errors : errors,title:"Login",css: ['main.css']})
+    return res.render('login',{port:process.env.PORT,errors : errors,title:"Login"})
   }else
   next();
   
