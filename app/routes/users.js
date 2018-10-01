@@ -13,6 +13,7 @@ router.post('/login',userController.loginPost,passportConfig.authenticate);
 router.get('/createUser',passportConfig.alreadyLogged,userController.signupGet);
 router.post('/createUser',userController.createUser);
 router.get('/logout', userController.logoutUser);
+router.get('/user',(req,res,next)=>{res.send(req.user)})
 //router.get('/startupInfo',(req,res,err)=>{res.render('startupInfo',{layout:'entrepreneur'})});
 
 

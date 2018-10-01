@@ -50,11 +50,11 @@ exports.createUser = function(req,res,next){
         })
     .then(user=>{
       console.log(user.UserLogin)
-      req.login(user.UserLogin, err => {
-                console.log(user.role)
-                if (err) return err;
-                return res.redirect('/'+user.role+'s')
-            })
+      
+      req.login(user,err=>{
+        if(err) return next(err);
+        return res.redirect('/'+req.user.role+'s')
+      })
       console.log('user created');
     })
     .catch(err=>{
