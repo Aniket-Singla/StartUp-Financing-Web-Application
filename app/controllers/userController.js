@@ -134,13 +134,18 @@ exports.updateUserPost = (req,res,next)=>{
     .then(()=>{res.send('credentials updated');})
   })
   .catch(err=>{
-    res.send('something went wrong');
+    next(err)
     console.log(err)
   })
 }
 
+
+
+
+
+
 /*
-*
+* Delete User Account
 */
 
 exports.deleteAccountGet = (req,res,next)=>{

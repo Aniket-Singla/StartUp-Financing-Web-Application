@@ -21,6 +21,7 @@ router.post('/account/update',passportConfig.isAuthenticated,userController.upda
 
 router.get('/account/delete',passportConfig.isAuthenticated,userController.deleteAccountGet);
 router.post('/account/delete',passportConfig.isAuthenticated,userController.deleteAccountPost);
+
 // router.get('/entrepreneur',passportConfig.isAuthenticated,(req,res)=>{
 // 	res.render('Accounts/entrepreneurs',{layout:'entrepreneur'});
 // 		//for view with no layout {layout: false}
