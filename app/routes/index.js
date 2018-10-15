@@ -2,18 +2,10 @@ var express = require('express');
 const path = require('path');
 
 var router = express.Router();
-const passportConfig = require(path.join(__dirname,'../config/passport'));
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('home',{ port:3000,title: 'Home', css: ['main.css'] });
-});
+const indexController = require(path.join(__dirname,'../controllers/index'));
 
-router.get('/investors',passportConfig.isAuthenticated,(req,res)=>{
-	res.render('investor',{layout:'investor_home'});
-});
-router.get('/entrepreneurs',passportConfig.isAuthenticated,(req,res)=>{
-	res.render('entrepreneurs',{layout:'entrepreneur'});
-		//for view with no layout {layout: false}
-});
+router.get('/',indexController.getHome);
+router.get('/aboutUs',indexController.getAbout);
+
 
 module.exports = router;

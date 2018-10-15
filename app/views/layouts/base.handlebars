@@ -10,9 +10,9 @@
     {{#each css}}
         <link rel="stylesheet" type="text/css" media="screen" href="/css/{{this}}" />
     {{/each}}
-    {{!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /> --}}
-    <link rel="shortcut icon" href="/custom.ico" type="image/x-icon" />
-    <script src="main.js"></script>
+    {{!-- <link rel="stylesheet" type="text/css" media="screen" href="{{link}}/css/main.css" /> --}}
+    <link rel="shortcut icon" href="{{link}}/custom.ico" type="image/x-icon" />
+    <script src="{{link}}/main.js"></script>
 </head>
 <!-- This webpage belongs to the signed in Entrepreneur -->
 <body class="logged-out">

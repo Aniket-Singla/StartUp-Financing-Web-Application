@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'UserId',
           onDelete : 'CASCADE',
           //allowNull : false
-          //foreign key is added to this model
+          
         });
       //Users.hasOne(models.Business);
     }

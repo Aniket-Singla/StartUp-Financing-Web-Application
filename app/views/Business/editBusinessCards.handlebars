@@ -1,0 +1,14 @@
+
+<ol>
+	<br>
+{{#each cards}}
+	<li>Name :{{this.startup_name}} <br>
+	Stage : {{this.startup_stage}} <br>
+	URL: {{this.startup_website_url}} <br>
+	Summary : {{this.startup_product_summary}} <br>
+	Team : {{this.startup_team_summary}}</li><br>
+    <a href="update/{{this.id}}"> Edit</a> 
+{{/each}}
+<br>
+<br>
+</ol>

@@ -1,0 +1,14 @@
+{{#if errors}}
+	{{#each errors}}
+	<div class="alert alert-danger">{{msg}}</div>
+	{{/each}}
+{{/if}}
+<form action="update" method="post">      
+		
+		{{!-- <input type= "text/html" placeholder = "email" id = "email" name="email" value={{user.email}}> --}}
+        <input type= "text/html" placeholder = "First Name" id = "first_name" name="fname" value={{user.first_name}}>
+        <input type= "text/html" placeholder = "Last Name" id = "last_name" name="lname" value={{user.last_name}}>
+        
+        <input type= "text/html" placeholder = "contact" id = "contact" name="contact" value={{user.contact_no}}>
+        <button type = "submit" id = "login">Update</button>
+</form>

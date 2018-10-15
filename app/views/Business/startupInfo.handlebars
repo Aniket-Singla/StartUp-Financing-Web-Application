@@ -4,7 +4,7 @@
   {{/each}}
 {{/if}}
 <form action="add" method="post" >
-          <div class="clearfix"></div>
+          
           <div class="col-sm-12">
             
               <label for="startup_name" class="col-sm-8 control-label required">Startup Name</label>
@@ -28,18 +28,59 @@
                           <option value="3">Beta Launched</option>
                           <option value="4">Early Revenues</option>
                           <option value="5">Steady Revenues</option></select>
-                
+                </select>
               </div>
            
           </div>
           <br>
+          <label for="business_type" class="col-sm-8 control-label required">Business Type</label>
+              <div class="col-md-16">
+                <select name="business_type" id="business_type" class="form-control" >
+                          <option value="">Select Business Type</option>
+                          <option value="1">Service</option>
+                          <option value="2">Merchandising</option>
+                          <option value="3">Manufacturing</option>
+                          <option value="4">Hybrid</option>
+                </select>
+              </div>
+              <br>
+
+          <label for="business_form" class="col-sm-8 control-label required">Form Of Business</label>
+              <div class="col-md-16">
+                <select name="business_form" id="business_form" class="form-control" >
+                          <option value="">Select Form of Doing Business</option>
+                          <option value="1">Sole Proprietorship</option>
+                          <option value="2">Partnership</option>
+                          <option value="3">Limited Partnership</option>
+                          <option value="4">Limited Liability Company (LLC)</option>
+                          <option value="5">Cooperative (Co-op)</option>
+                </select>
+              </div>
+              <br>
+
+              <label name="industry_id">Industry </label>
+              <select name="industry_id"  class="form-control">
+                <option value="">Select One</option>
+                {{#each industries}}
+                <option value="{{this.id}}">{{this.industryName}}</option>
+                {{/each}}
+            
+              </select>
+          
+
+    
+    
+    
+
+    
+
           <!-- Startup Website URL -->
           <div class="col-sm-12">
             <div class="form-group">
               <label for="startup_website_url" class="col-sm-8 control-label">Website Address</label>
-              <div class="col-sm-16">
+              
                 <input type="text" name="startup_website_url" class="form-control">
-              </div>
+          
             </div>
           </div>
           
@@ -48,9 +89,8 @@
            
               <label for="startup_founding_year" class="col-sm-8 control-label required">Founded In</label>
               <input type="text" name="startup_founding_year" placeholder="year">
-              <div class="col-sm-16">
-                <div class="row">
-                  <div class="col-sm-12" style="padding-right: 2px;">
+              
+                  
                     <select name="startup_founding_month" id="monthpicker" class="form-control">
                       <option value="0">January</option>
                       <option value="1">February</option>
@@ -65,22 +105,20 @@
                       <option value="10">November</option>
                       <option value="11">December</option>
                     </select>
-                    
-                  </div>
-                  <div class="col-sm-12">
+                  
                     <input type='text' name="startup_founding_date" class="form-control"
                            
                            id='yearpicker' placeholder="finding date">
                     
                    
-                  </div>
+                  
                 </div>
-              </div>
             
-          </div>
+            
+          
             <label for="startup_product_summary" class="col-sm-8 control-label">Product/Service Summary
             </label>  
-            <textarea type="text" class="texttooltip form-control" rows="4" name="startup_product_summary" lv-limit-to="1000"   placeholder="provide a summary of product and services that you offer to customers">
+            <textarea type="text"  name="startup_product_summary" lv-limit-to="1000"   placeholder="provide a summary of product and services that you offer to customers">
             </textarea>
             </label>  
               <br>

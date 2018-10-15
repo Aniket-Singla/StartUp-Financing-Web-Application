@@ -1,14 +1,14 @@
 <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">My Dashboard</a>
-        <a href="#">Update Business Preferences</a>
-        <a href="#">Find Business</a>
+        <a href="#">{{user.first_name}}'s Dashboard</a>
+        <a href="http://localhost:{{port}}/business/view">Find Business</a>
+        {{!-- <a href="#">Update Business Preferences</a> --}}
         <button class="dropdown-btn">Account Settings 
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-container">
-            <a href="#">Update Profile</a>
-            <a href="#">Delete Profile</a>
+            <a href="http://localhost:{{port}}/users/account/update">Update Profile</a>
+            <a href="http://localhost:{{port}}/users/account/delete">Delete Profile</a>
           </div>
-        <a href="#">Contact</a>
+        {{!-- <a href="#">Contact</a> --}}
       </div>

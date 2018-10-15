@@ -1,20 +1,20 @@
 <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">My Dashboard</a>
+        <a href="#">{{user.first_name}}'s Dashboard</a>
         <a href="#">Find Investors</a>
         <button class="dropdown-btn">Update Business
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-container">
-            <a href="#">Update Business Info</a>
-            <a href="#">Download Pitch Deck</a>
-            <a href="#">Add Another Business</a>
+            <a href="http://localhost:{{port}}/business/update">Update Business Info</a>
+            {{!-- <a href="#">Download Pitch Deck</a> --}}
+            <a href="http://localhost:{{port}}/business/add">Add Another Business</a>
           </div>
           <button class="dropdown-btn">Account Settings
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-container">
-            <a href="#">Update Profile</a>
-            <a href="#">Delete Account</a>
+            <a href="http://localhost:{{port}}/users/account/update">Update Profile</a>
+            <a href="http://localhost:{{port}}/users/account/delete">Delete Account</a>
           </div>
       </div>

@@ -10,6 +10,7 @@ function topnavBurger() {
         x.className = "main-nav";
     }
 }
+
 /*
 * Side Navigation Bar
 */

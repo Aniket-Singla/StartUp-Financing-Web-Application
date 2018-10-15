@@ -20,6 +20,12 @@ module.exports = (sequelize,DataTypes) => {
 				isUrl : true,
 			}
 		},
+		business_type : {
+			type: DataTypes.INTEGER
+		},
+		business_form : {
+			type : DataTypes.INTEGER
+		},
 		startup_founding_year:{
 			type : DataTypes.INTEGER
 		},
@@ -43,6 +49,7 @@ module.exports = (sequelize,DataTypes) => {
 	{
 		Business.associate= function(models){
 			Business.belongsTo(models.Users);
+			Business.belongsTo(models.Industry);
 		}
 	}
 

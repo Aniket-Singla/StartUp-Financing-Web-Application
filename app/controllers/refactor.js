@@ -1,3 +1,18 @@
+  const path = require('path');
+  const Industry = require(path.join(__dirname,'../models/index')).Industry;
+  
+  //to add multiple rows at a time in Industry category
+var strings = ["Beauty","Boats","Commercial","Communications","Consumer","Design","Education","Energy","Entertainment","Fashion","Finance","Fitness","Food","Food",
+"Rental","Residential","Restaurants","Retail","Services","Software","Specialty","Sports","Stores","Stores(restaurants, coffee shops, bars)","Technology","Web","Wellness","Cars","Health & Beauty",
+"Other"]
+console.log(strings);
+for(i in strings){
+  Industry.create({
+    industryName : strings[i]
+  })
+
+}
+
   /*  const user = {
     userName: req.body.username,
     email: req.body.email,
@@ -32,7 +47,6 @@
 
 
 
-
   // console.log('found user...');
         // console.log(user.dataValues);
         /*user.comparePassword(password, (err, isMatch) => {
@@ -55,3 +69,4 @@
 //         next();
 //     }    
 // };
+

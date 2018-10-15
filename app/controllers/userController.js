@@ -1,3 +1,4 @@
+//require('dotenv').config();
 const path = require('path');
 const passportConfig = require(path.join(__dirname,'../config/passport'));
 const { check, validationResult } = require('express-validator/check');
@@ -24,11 +25,10 @@ exports.createUser = function(req,res,next){
   req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
   var errors =   req.validationErrors();
   if(errors){
-    res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors})
+    return res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors})
   }
-  else{
-   
-     var username = req.body.username;
+  else{   
+    var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
     var fname = req.body.fname;
@@ -53,7 +53,7 @@ exports.createUser = function(req,res,next){
       
       req.login(user,err=>{
         if(err) return next(err);
-        return res.redirect('/'+req.user.role+'s')
+        return res.redirect('/users/account')
       })
       console.log('user created');
     })
@@ -108,8 +108,62 @@ exports.loginPost = (req, res, next) => {
 
 }
 
+/* 
+* Update User
+*/
 
+exports.updateUserGet = (req,res,next)=>{
 
+  res.render('Accounts/updateUser',{layout:req.user.role,port:process.env.PORT})
+
+}
+
+exports.updateUserPost = (req,res,next)=>{
+  req.checkBody('fname','First name cannot be empty').notEmpty();
+  req.checkBody('lname','Last name cannot be empty').notEmpty();
+  req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
+  var errors =   req.validationErrors();
+  if(errors){
+    return res.render('Accounts/updateUser',{layout:req.user.role,port:process.env.PORT,errors:errors})
+  }
+  User.findById(req.user.id)
+  .then(user=>{
+    user.update({first_name: req.body.fname,
+                last_name : req.body.lname,
+                contact_no : req.body.contact})
+    .then(()=>{res.send('credentials updated');})
+  })
+  .catch(err=>{
+    res.send('something went wrong');
+    console.log(err)
+  })
+}
+
+/*
+*
+*/
+
+exports.deleteAccountGet = (req,res,next)=>{
+  res.render('Accounts/deleteAccount',{layout:req.user.role,port:process.env.PORT});
+  //res.send('in delete')
+}
+
+exports.deleteAccountPost = (req,res,next)=>{
+  User.findById(req.user.id)
+  .then(user=>{
+    user.destroy()
+    .then(()=>{
+      res.send('user deleted')
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  })
+  .catch(err=>{
+    next(err)
+  })
+  //res.send('in delete')
+}
 exports.logout = (req, res) => {
     req.session.destroy(() => {
         res.redirect('/')

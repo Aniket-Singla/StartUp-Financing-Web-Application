@@ -7,13 +7,13 @@
            
             <nav class="main-nav" id="topnav">
                 <a href="/">Home</a>
-                <a href="/aboutus">About Us</a>
+                <a href="http://localhost:{{port}}/aboutUs">About Us</a>
                 <span id="user-login" class="login">
                     <a href="http://localhost:{{port}}/users/login">Sign in</a>
                     <span class="whitespace">or</span>
                     <a href="http://localhost:{{port}}/users/createUser">Sign up</a>
                 </span>
-                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <a href="javascript:void(0);" id="myDropDownTop" class="icon" onclick="topnavBurger()">
                     <i class="fa fa-bars"></i>
                   </a>
             </nav>

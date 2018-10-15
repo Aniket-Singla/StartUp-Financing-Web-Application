@@ -1,0 +1,139 @@
+{{#if errors}}
+  {{#each errors}}
+  <div class="alert alert-danger">{{msg}}</div>
+  {{/each}}
+{{/if}}
+
+<form action="/business/update/{{card.id}}" method="POST" >
+    <div class="col-sm-12">
+            
+              <label for="startup_name" class="col-sm-8 control-label required">Startup Name</label>
+              <div class="col-sm-16">
+                <input type="text" name="startup_name" value={{card.startup_name}}>
+                
+              </div>
+         
+          </div>
+          <br/>
+          <!-- Stage -->
+          <div class="col-sm-12">
+            
+              <label for="startup_stage" class="col-sm-8 control-label required">Stage</label>
+              <div class="col-md-16">
+          
+                <select name="startup_stage" id="startup_stage">
+                          <option value="">Select Startup Stage</option>
+                          <option value="1"  >Ideation</option>
+                          <option value="2">Proof of Concept</option>
+                          <option value="3">Beta Launched</option>
+                          <option value="4">Early Revenues</option>
+                          <option value="5">Steady Revenues</option></select>
+                </select>
+              </div>
+           
+          </div>
+          <br>
+          <label for="business_type" class="col-sm-8 control-label required">Business Type</label>
+              <div class="col-md-16">
+                <select name="business_type" id="business_type">
+                          <option value="">Select Business Type</option>
+                          <option value="1">Service</option>
+                          <option value="2">Merchandising</option>
+                          <option value="3">Manufacturing</option>
+                          <option value="4">Hybrid</option>
+                </select>
+              </div>
+              <br>
+
+          <label for="business_form" class="col-sm-8 control-label required">Form Of Business</label>
+              <div class="col-md-16">
+                
+                <select name="business_form" id="business_form" class="form-control" >
+                          <option value="">Select Form of Doing Business</option>
+                          <option value="1">Sole Proprietorship</option>
+                          <option value="2">Partnership</option>
+                          <option value="3">Limited Partnership</option>
+                          <option value="4">Limited Liability Company (LLC)</option>
+                          <option value="5">Cooperative (Co-op)</option>
+                </select>
+              </div>
+              <br>
+
+              <label name="industry_id">Industry </label>
+              <select name="industry_id"  class="form-control">
+                <option value="">Select One</option>
+                {{#each industries}}
+                <option value="{{this.id}}">{{this.industryName}}</option>
+                {{/each}}
+            
+              </select>
+          
+
+    
+    
+    
+
+    
+
+          <!-- Startup Website URL -->
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="startup_website_url" >Website Address</label>
+              
+                <input type="text" name="startup_website_url" class="form-control" value={{card.startup_website_url}}>
+          
+            </div>
+          </div>
+          
+          <!-- Founding Year -->
+          <div class="col-sm-12">
+           
+              <label for="startup_founding_year" class="col-sm-8 control-label required">Founded In</label>
+              <input type="text" name="startup_founding_year" value={{card.startup_founding_year}} placeholder="year">
+              
+                  
+                    <select name="startup_founding_month" id="monthpicker" class="form-control" >
+                      <option value="0">January</option>
+                      <option value="1">February</option>
+                      <option value="2">March</option>
+                      <option value="3">April</option>
+                      <option value="4">May</option>
+                      <option value="5">June</option>
+                      <option value="6">July</option>
+                      <option value="7">August</option>
+                      <option value="8">September</option>
+                      <option value="9">October</option>
+                      <option value="10">November</option>
+                      <option value="11">December</option>
+                    </select>
+                  
+                    <input type='text' name="startup_founding_date" class="form-control" value={{card.startup_founding_date}} placeholder="finding date">
+                    
+                   
+                  
+                </div>
+            
+            
+          
+            <label for="startup_product_summary" class="col-sm-8 control-label">Product/Service Summary
+            </label>  
+            <input type="text/html"  name="startup_product_summary" value={{card.startup_product_summary}}  placeholder="provide a summary of product and services that you offer to customers">
+            
+            </label>  
+              <br>
+              <br>
+            <label for="startup_team_summary" class="col-sm-8 control-label">Team Summary
+            </label>  
+            <input type="text/html" name="startup_team_summary" value={{card.startup_team_summary}}   placeholder="provide a summary of team that you offer to customers">
+           
+              <br>
+              <br>
+          
+            <label for="difference" >How are u different
+            </label>
+
+            <input type="text/html" name="difference" value={{card.difference}} placeholder="provide information on your competition and how you differentiate">
+            
+             
+            <input type="submit"  value="Update">
+</form>
