@@ -1,13 +1,18 @@
 
-<ul>
-	<br>
 {{#each cards}}
-	<li>Name :{{this.startup_name}} <br>
-	Stage : {{this.startup_stage}} <br>
-	URL: {{this.startup_website_url}} <br>
-	Summary : {{this.startup_product_summary}} <br>
-	Team : {{this.startup_team_summary}}</li><br>
+<li>
+<div class="card text-center">
+  <div class="card-header">
+    {{this.startup_name}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{this.startup_product_summary}}</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="/business/view/{{this.id}}" class="btn btn-primary">Visit</a>
+  </div>
+  <div class="card-footer text-muted">
+    Uniqueness : {{this.difference}}
+  </div>
+</div>
+</li>
 {{/each}}
-<br>
-<br>
-</ul>

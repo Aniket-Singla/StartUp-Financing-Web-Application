@@ -3,94 +3,95 @@
   <div class="alert alert-danger">{{msg}}</div>
   {{/each}}
 {{/if}}
-<form action="add" method="post" >
-          
-          <div class="col-sm-12">
-            
-              <label for="startup_name" class="col-sm-8 control-label required">Startup Name</label>
-              <div class="col-sm-16">
-                <input type="text" name="startup_name" class="form-control"
-                  data-ng-model="startup.name" data-ng-required="true" fill-permalink-on-blur>
-                
-              </div>
-         
-          </div>
-          <br/>
-          <!-- Stage -->
-          <div class="col-sm-12">
-            
-              <label for="startup_stage" class="col-sm-8 control-label required">Stage</label>
-              <div class="col-md-16">
-                <select name="startup_stage" id="startup_stage" class="form-control" >
-                          <option value="">Select Startup Stage</option>
+
+<!--Startup Name-->
+  <form action="add" method="post" >
+  <div class="container">
+  <h1 class="text-primary"> Enterpreneur Bussiness Info </h1>
+  
+  <div class="form-row">
+    
+    <div class="form-group col-md-12">
+      <label for="startup_name"><h5>Start_Up Name</h5></label>
+      <input type="text" class="form-control" name="startup_name"  placeholder="StartUp Name">
+    </div>
+
+    <!-- Stage-->
+      
+    <div class="form-group col-md-12">
+      <label for="startup-stage"><h5>Stage</h5></label>
+      <select name="startup_stage" id="startup_stage" class="form-control" >
+          <option value="">Select Startup Stage</option>
                           <option value="1">Ideation</option>
                           <option value="2">Proof of Concept</option>
                           <option value="3">Beta Launched</option>
                           <option value="4">Early Revenues</option>
-                          <option value="5">Steady Revenues</option></select>
-                </select>
-              </div>
-           
-          </div>
-          <br>
-          <label for="business_type" class="col-sm-8 control-label required">Business Type</label>
-              <div class="col-md-16">
-                <select name="business_type" id="business_type" class="form-control" >
-                          <option value="">Select Business Type</option>
+                          <option value="5">Steady Revenues</option>
+      </select>
+    </div>
+
+    <!--Business Type-->
+    <div class="form-group col-md-12">
+      <label for="Business Type"><h5>Business type</h5></label>
+      <select name="business_type" class="form-control">
+                           <option value="">Select Business Type</option>
                           <option value="1">Service</option>
                           <option value="2">Merchandising</option>
                           <option value="3">Manufacturing</option>
                           <option value="4">Hybrid</option>
-                </select>
-              </div>
-              <br>
+      </select>
+    </div>
 
-          <label for="business_form" class="col-sm-8 control-label required">Form Of Business</label>
-              <div class="col-md-16">
-                <select name="business_form" id="business_form" class="form-control" >
-                          <option value="">Select Form of Doing Business</option>
+    <!--Form Of Business-->
+
+
+    <div class="form-group col-md-12">
+      <label for="Business_Form"><h5>Form Of Business</h5></label>
+       <select name="business_form" id="business_form" class="form-control" >
+           <option value="">Select Form of Doing Business</option>
                           <option value="1">Sole Proprietorship</option>
                           <option value="2">Partnership</option>
                           <option value="3">Limited Partnership</option>
                           <option value="4">Limited Liability Company (LLC)</option>
                           <option value="5">Cooperative (Co-op)</option>
-                </select>
-              </div>
-              <br>
+      </select>
+    </div>
 
-              <label name="industry_id">Industry </label>
-              <select name="industry_id"  class="form-control">
-                <option value="">Select One</option>
+    <!-- Industry-->
+  <div class="form-group col-md-12">
+      <label for="industry_id"><h5>Industry</h5></label>
+    <select name="industry_id"  class="form-control">
+              <option value="">Select One</option>
                 {{#each industries}}
                 <option value="{{this.id}}">{{this.industryName}}</option>
                 {{/each}}
-            
-              </select>
-          
+      </select>
+    </div>
+
+
+   
+    <!-- Website Address-->
+   
+   <div class="form-group col-md-12">
+      <label for="website address"><h5>Website address</h5></label>
+       <input type="text" name="startup_website_url" class="form-control">
+    </div>
 
     
-    
-    
+    <!--Founded In-->
+
+     <div class="form-group col-md-12">
+      <label for="startup_founding_year"><h5>Founded In</h5></label>
+      </div>
+          <div class="form-group col-md-4">
+      
+    <input type="text" name="startup_founding_year" placeholder="year">
+    </div>
 
     
 
-          <!-- Startup Website URL -->
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label for="startup_website_url" class="col-sm-8 control-label">Website Address</label>
-              
-                <input type="text" name="startup_website_url" class="form-control">
-          
-            </div>
-          </div>
-          
-          <!-- Founding Year -->
-          <div class="col-sm-12">
-           
-              <label for="startup_founding_year" class="col-sm-8 control-label required">Founded In</label>
-              <input type="text" name="startup_founding_year" placeholder="year">
-              
-                  
+    <div class="form-group col-md-4">
+   
                     <select name="startup_founding_month" id="monthpicker" class="form-control">
                       <option value="0">January</option>
                       <option value="1">February</option>
@@ -105,35 +106,38 @@
                       <option value="10">November</option>
                       <option value="11">December</option>
                     </select>
-                  
-                    <input type='text' name="startup_founding_date" class="form-control"
+    </div>
+
+    
+  <div class="form-group col-md-4">
+    
+     <input type='text' name="startup_founding_date" class="form-control"
                            
                            id='yearpicker' placeholder="finding date">
-                    
-                   
-                  
-                </div>
-            
-            
-          
-            <label for="startup_product_summary" class="col-sm-8 control-label">Product/Service Summary
-            </label>  
-            <textarea type="text"  name="startup_product_summary" lv-limit-to="1000"   placeholder="provide a summary of product and services that you offer to customers">
-            </textarea>
-            </label>  
-              <br>
-            <label for="startup_team_summary" class="col-sm-8 control-label">Team Summary
-            </label>  
-            <textarea type="text" class="texttooltip form-control" rows="4" name="startup_team_summary" lv-limit-to="1000"   placeholder="provide a summary of team that you offer to customers">
-            </textarea>
-              
-              <br>
-            <label for="difference" class="col-sm-8 control-label">How are u different
-            </label>  
-            <textarea type="text" class="texttooltip form-control" rows="4" name="difference" lv-limit-to="1000"   placeholder="provide information on your competition and how you differentiate">
-            </textarea>
-             
-            <input type="submit"  value="ADD">
+    </div>
 
-            
+</div>
+<!--Product/Service Summary-->
+
+<div class="form-group col-md-12">
+  <label for="Product/Service Summary"><h5>Product/Service Summary</h5></label>
+  <textarea class="form-control" name="startup_product_summary"rows="5" id="comment"  placeholder="provide a summary of product and services that you offer to customers"></textarea>
+</div>
+
+<!--Team Summary-->
+
+<div class="form-group col-md-12">
+  <label for="Team Summary"><h5>Team Summary</h5></label>
+  <textarea class="form-control" name="startup_team_summary" rows="5" id="comment" placeholder="provide a summary of team that you offer to customers"></textarea>
+</div>
+
+<!--How are you different-->
+
+<div class="form-group col-md-12">
+  <label for="How are you different"><h5>How are you different</h5></label>
+  <textarea class="form-control" name="difference" rows="5" id="comment" placeholder="provide information on your competition and how you differentiate"></textarea>
+</div>
+<!-- Button-->
+<button type="submit" class="btn">Add</button>
 </form>
+</div>

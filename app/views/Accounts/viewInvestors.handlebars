@@ -1,12 +1,12 @@
 
-<ul>
-	<br>
 {{#each investors}}
-	<li>First Name :{{this.first_name}} <br>
-		 Last Name: {{this.last_name}} <br>
-		 Contact No. : {{this.contact_no}}
-	</li>
-{{/each}}
-<br>
-<br>
-</ul>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{this.first_name}} {{this.last_name}}</h5>
+    <h6 class="card-text">Contact : {{this.contact_no}}</h6>
+    
+  </div>
+</div>
+
+	{{/each}}

@@ -3,17 +3,45 @@
 	<div class="alert alert-danger">{{msg}}</div>
 	{{/each}}
 {{/if}}
-<form action="createUser" method="post">      
-		<input type= "text/html" placeholder = "username" id = "username" name="username" >
-		<input type= "text/html" placeholder = "email" id = "email" name="email">
-        <input type= "password" placeholder = "password" id = "password" name="password">
-        <input type= "text/html" placeholder = "First Name" id = "first_name" name="fname">
-        <input type= "text/html" placeholder = "Last Name" id = "last_name" name="lname">
-         <select name="role">
-          <option value="">Select Your Role</option>
-		  <option value="entrepreneur">Entrepreneur</option>
-		  <option value="investor">Investor</option>
-		</select> 
-        <input type= "text/html" placeholder = "contact" id = "contact" name="contact">
-        <button type = "submit" id = "login">SignUp</button>
+<form action="createUser" method="post">  
+		<div class="form-group col-md-12">
+	      <label for="fname"><h5>First Name</h5></label>
+	      <input type="text" class="form-control" name="fname" placeholder="First Name">
+    	</div>
+
+    	<div class="form-group col-md-12">
+	      <label for="lname"><h5>Last Name</h5></label>
+	      <input type="text" class="form-control" name="lname" placeholder="Last Name">
+    	</div>
+        
+        <div class="form-group col-md-12">
+	      <label for="contact"><h5>Contact</h5></label>
+	      <input type="text" class="form-control" name="contact"  placeholder="Ex : 99999999999">
+    	</div>    
+
+    	<div class="form-group col-md-12">
+	      <label for="username"><h5>Username</h5></label>
+	      <input type="text" class="form-control" name="username"  placeholder="Username">
+    	</div>
+    	<div class="form-group col-md-12">
+	      <label for="email"><h5>Email</h5></label>
+	      <input type="email" class="form-control" name="email"  placeholder="Ex. Email@mail.com">
+    	</div>
+
+		<div class="form-group col-md-12">
+	      <label for="password"><h5>Password</h5></label>
+	      <input type="password" class="form-control" name="password"  placeholder="password">
+    	</div>
+        
+        <div class="form-group col-md-12">
+		    <label for="role">Example select</label>
+		    <select class="form-control" name="role">
+		      <option value="">Select Your Role</option>
+			  <option value="entrepreneur">Entrepreneur</option>
+			  <option value="investor">Investor</option>
+		    </select>
+  		</div>
+         
+        
+        <button type = "submit" class="form-control col-md-3 btn btn-primary" id = "login">SignUp</button>
 </form>

@@ -3,8 +3,14 @@
  <div class="alert alert-danger">inside errors {{msg}}
  </div>
 {{/each}}
-<form action="login" method="post">      
-		<input type= "text/html" placeholder = "username" id = "username" name="username" >
-        <input type= "password" placeholder = "password" id = "password" name="password">
-        <button type = "submit" id = "login">Login</button>
+<form action="login" method="post">
+		<div class="form-group col-md-12">
+	      <label for="username"><h5>Username</h5></label>
+	      <input type="text" class="form-control" name="username"  placeholder="Username">
+    	</div>      
+		<div class="form-group col-md-12">
+	      <label for="password"><h5>Password</h5></label>
+	      <input type="password" class="form-control" name="password"  placeholder="password">
+    	</div>
+    	<button type = "submit" class="btn btn-primary" id = "login">SignIn</button>
 </form>

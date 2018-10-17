@@ -125,6 +125,12 @@ app.use('/',indexRouter);
 app.use('/users',usersRouter);
 app.use('/business',businessRouter);
 app.use('/investors',investorsRouter);
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).redirect('/500')
+})
+app.get('*',(req,res)=>{res.redirect('/404')});
+
 //app.use('/api',)
 // get requests
 

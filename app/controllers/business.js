@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator/check');
 const Op = require("sequelize").Op;
 const db = require(path.join(__dirname,'../models/index'));
 //const UserLogin = db.UserLogins;
-//const User = db.Users;
+const User = db.Users;
 const Business = db.Business;
 
 exports.addBusinessGet = (req,res)=>{
@@ -16,7 +16,7 @@ exports.addBusinessGet = (req,res)=>{
 	res.render('Business/startupInfo',{port:process.env.PORT,layout:'entrepreneur',industries:industries});
 	})
 	.catch(err=>{
-		res.send("Something Went Wrong");
+		next(err);
 		console.log(err);
 	})
 	
@@ -31,6 +31,7 @@ exports.addBusinessPost = (req,res,next)=>{
 	req.checkBody('startup_founding_year','startup_founding_year').notEmpty();
 	req.checkBody('startup_product_summary','startup_product_summary').notEmpty();
 	req.checkBody('startup_team_summary','startup_team_summary').notEmpty();
+	req.checkBody('industry_id','industry is required').notEmpty();
 	req.checkBody('difference','Please Provide difference bw u and others').notEmpty();
 	var errors =   req.validationErrors();
   if(errors){
@@ -61,22 +62,43 @@ exports.addBusinessPost = (req,res,next)=>{
   	})
   	.catch(err=>{
   		console.log(err);
-  		res.send(err);
+  		next(err);
   	})
   }
 }
 exports.viewBusinessGet = (req,res,next)=>{
 	Business.all()
 	.then(businesses=>{
+
 		res.render('Business/ViewCards',{port:process.env.PORT,layout:req.user.role,cards:businesses});
 	})
 	.catch(err=>{
-		res.send('something went wrong');
+		next(err);
 		console.log(err);
 	})
 	//res.render('ViewCards',{layout:entrepreneur,card:});
 }
+var Stage = ['Ideation','Proof of Concept','Beta Launched','Early Revenues','Steady Revenues'];
+var IndustriesMenu = ['Beauty','Boats','Commercial','Communications','Consumer','Design','Education','Energy','Entertainment','Fashion','Finance','Fitness','Food','Food','Rental','Residential','Restaurants','Retail','Services','Software','Specialty','Sports','Stores','Stores(restaurants, coffee shops, bars)','Technology','Web','Wellness','Cars','Health & Beauty','Other'];
+var BusType =['Service','Merchandising','Manufacturing','Hybrid'];
+exports.viewOneBusinessGet= (req,res,next)=>{
+	var id = req.params.id;
 
+	Business.findById(id)
+	.then(business=>{
+		var busStage = Stage[business.startup_stage-1];
+		var busIndus = IndustriesMenu[business.IndustryId-1];
+		var busType = BusType[business.business_type-1];
+		console.log(busIndus)
+		res.render('Business/ViewBusiness',
+			{port:process.env.PORT,
+				busStage:busStage,
+				busIndus:busIndus,
+				busType:busType,
+				layout:req.user.role,business:business});
+	})
+	.catch(err=>{next(err)})
+}
 exports.updateBusinessGet = (req,res,next)=>{
 	if(req.user.role==='entrepreneur'){
 		Business.findAll({where : 

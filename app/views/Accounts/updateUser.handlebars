@@ -6,9 +6,20 @@
 <form action="update" method="post">      
 		
 		{{!-- <input type= "text/html" placeholder = "email" id = "email" name="email" value={{user.email}}> --}}
-        <input type= "text/html" placeholder = "First Name" id = "first_name" name="fname" value={{user.first_name}}>
-        <input type= "text/html" placeholder = "Last Name" id = "last_name" name="lname" value={{user.last_name}}>
+		<div class="form-group col-md-12">
+	      <label for="fname"><h5>First Name</h5></label>
+	      <input type="text" class="form-control" name="fname" value={{user.first_name}} placeholder="First Name">
+    	</div>
+
+    	<div class="form-group col-md-12">
+	      <label for="lname"><h5>Last Name</h5></label>
+	      <input type="text" class="form-control" name="lname" value={{user.last_name}} placeholder="Last Name">
+    	</div>
         
-        <input type= "text/html" placeholder = "contact" id = "contact" name="contact" value={{user.contact_no}}>
-        <button type = "submit" id = "login">Update</button>
+        <div class="form-group col-md-12">
+	      <label for="contact"><h5>Contact</h5></label>
+	      <input type="text" class="form-control" name="contact" value={{user.contact_no}} placeholder="Last Name">
+    	</div>
+        
+        <button type = "submit" class="btn btn-primary" id = "login">Update</button>
 </form>

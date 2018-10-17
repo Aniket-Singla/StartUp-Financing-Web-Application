@@ -1,0 +1,5 @@
+body{
+      background-image : url("http://localhost:3000/images/500.jpg");
+      background-repeat : no-repeat;
+      background-size : 100%;
+  }

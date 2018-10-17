@@ -1,20 +1,38 @@
-<div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">{{user.first_name}}'s Dashboard</a>
-        <a href="http://localhost:{{port}}/investors">Find Investors</a>
-        <button class="dropdown-btn">Update Business
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-container">
-            <a href="http://localhost:{{port}}/business/update">Update Business Info</a>
-            {{!-- <a href="#">Download Pitch Deck</a> --}}
-            <a href="http://localhost:{{port}}/business/add">Add Another Business</a>
-          </div>
-          <button class="dropdown-btn">Account Settings
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-container">
-            <a href="http://localhost:{{port}}/users/account/update">Update Profile</a>
-            <a href="http://localhost:{{port}}/users/account/delete">Delete Account</a>
-          </div>
-      </div>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>{{user.first_name}}'s Dashboard</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                {{!-- <p>Dummy Heading</p> --}}
+                <li class="active">
+                    <a href="#accountSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Account Settings</a>
+                    <ul class="collapse list-unstyled" id="accountSubmenu">
+                        <li>
+                            <a href="http://localhost:{{port}}/users/account/update">Update Profile</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:{{port}}/users/account/delete">Delete Account</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#businessSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Business Info</a>
+                    <ul class="collapse list-unstyled" id="businessSubmenu">
+                        <li>
+                            <a href="http://localhost:{{port}}/business/update">Update Business Info</a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:{{port}}/business/add">Add Business</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://localhost:{{port}}/investors">Find Investors</a>
+                </li>
+              
+            </ul>
+        </nav>
