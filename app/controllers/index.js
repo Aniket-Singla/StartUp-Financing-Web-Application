@@ -20,7 +20,7 @@ exports.get404 = (req,res)=>{
 	{
 		return res.render('404',{ port:process.env.PORT,title: '404', layout: req.user.role,css: ['main.css','404.css'] })
 	}
-	return res.render('404',{ port:process.env.PORT,title: '404',css: ['main.css','404.css'] })
+	return res.render('404',{ port:process.env.PORT,title: '404',css: ['404.css'],title:'404' })
 }
 
 exports.get500 = (req,res)=>{
@@ -28,5 +28,5 @@ exports.get500 = (req,res)=>{
 	{
 		return res.render('500',{ port:process.env.PORT,title: '500', layout: req.user.role,css: ['main.css','500.css'] })
 	}
-	return res.render('500',{ port:process.env.PORT,title: '500',css: ['main.css','500.css'] })
+	return res.render('500',{ port:process.env.PORT,title: '500',title:'500',css: ['500.css'] })
 }

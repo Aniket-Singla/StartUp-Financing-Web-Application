@@ -1,25 +1,4 @@
-{{!-- <header class="fixed top-bar">
-        <div class="navbar-wrap">
-            <div class="site-logo">
-                <img id="logo" src="http://localhost:{{port}}/images/Example.png" height="50" width="50" alt="Startup Financing">
 
-            </div>
-           
-            <nav class="main-nav" id="topnav">
-                <a href="/">Home</a>
-                <a href="http://localhost:{{port}}/aboutUs">About Us</a>
-                <span id="user-login" class="login">
-                    <a href="http://localhost:{{port}}/users/login">Sign in</a>
-                    <span class="whitespace">or</span>
-                    <a href="http://localhost:{{port}}/users/createUser">Sign up</a>
-                </span>
-                <a href="javascript:void(0);" id="myDropDownTop" class="icon" onclick="topnavBurger()">
-                    <i class="fa fa-bars"></i>
-                  </a>
-            </nav>
-            
-        </div>
-    </header> --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="http://localhost:{{port}}/images/Example.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -31,9 +10,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="http://localhost:{{port}}/aboutUs">About Us</a>
-      <a class="nav-item nav-link" href="http://localhost:{{port}}/users/login">Sign in</a>
-      <a class="nav-item nav-link" href="http://localhost:{{port}}/users/createUser">Sign Up</a>
+      <a class="nav-item nav-link" href="/aboutUs">About Us</a>
+      <a class="nav-item nav-link" href="/users/login">Sign in</a>
+      <a class="nav-item nav-link" href="/users/createUser">Sign Up</a>
       {{!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> --}}
     </div>
   </div>

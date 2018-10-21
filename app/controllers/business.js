@@ -13,7 +13,7 @@ const Business = db.Business;
 exports.addBusinessGet = (req,res)=>{
 	Industry.all()
 	.then(industries=>{
-	res.render('Business/startupInfo',{port:process.env.PORT,layout:'entrepreneur',industries:industries});
+	res.render('Business/startupInfo',{port:process.env.PORT,title:'Add StartUp Info',layout:'entrepreneur',industries:industries});
 	})
 	.catch(err=>{
 		next(err);
@@ -38,7 +38,7 @@ exports.addBusinessPost = (req,res,next)=>{
   	Industry.all()
 	.then(industries=>{
 	
-	return res.render('Business/startupInfo',{port:process.env.PORT,layout:'entrepreneur',errors:errors,industries:industries})
+	return res.render('Business/startupInfo',{port:process.env.PORT,layout:'entrepreneur',title:'Add StartUp Info',errors:errors,industries:industries})
 	})
   }
   else{
@@ -58,7 +58,8 @@ exports.addBusinessPost = (req,res,next)=>{
 		IndustryId : req.body.industry_id
   	})
   	.then(business=>{
-  		res.send('added')
+  		req.flash('success_msg', 'Your Business was Successfully added');
+  		res.redirect('/users/account');
   	})
   	.catch(err=>{
   		console.log(err);
@@ -70,7 +71,7 @@ exports.viewBusinessGet = (req,res,next)=>{
 	Business.all()
 	.then(businesses=>{
 
-		res.render('Business/ViewCards',{port:process.env.PORT,layout:req.user.role,cards:businesses});
+		res.render('Business/ViewCards',{port:process.env.PORT,title:'View Business Info',layout:req.user.role,cards:businesses});
 	})
 	.catch(err=>{
 		next(err);
@@ -108,13 +109,14 @@ exports.updateBusinessGet = (req,res,next)=>{
 		.then(businesses=>{
 			
 			if(businesses.length===0){
-				res.send('Business not found please add one');
+				req.flash('error_msg', 'No Business Found Please Add one first');
+  				res.redirect('/users/account');
 
 			}
 			else{
 				//console.log(businesses.length);
 				//display all his / her cards to give option which one to edit
-				res.render('Business/editBusinessCards',{port:process.env.PORT,layout:req.user.role,cards:businesses});
+				res.render('Business/editBusinessCards',{port:process.env.PORT,title:'Update StartUp Info',layout:req.user.role,cards:businesses});
 			}
 		})
 		.catch(err=>{
@@ -123,7 +125,8 @@ exports.updateBusinessGet = (req,res,next)=>{
 		})
 	}
 	else{
-		res.send('Only entrepreneur may have business');
+		req.flash('error_msg', 'Sorry, Only Entrepreneurs are allowed to add business till now.');
+  		res.redirect('/users/account');
 	}
 }
 
@@ -137,8 +140,12 @@ exports.updateBusinessById = (req,res,next)=>{
 			Industry.all()
 			.then(industries=>{
 	
-			res.render('Business/editById',{port:process.env.PORT,industries:industries,layout:req.user.role,card:business});
+			res.render('Business/editById',{port:process.env.PORT,title:'Update StartUp Info',industries:industries,layout:req.user.role,card:business});
 			})
+		}
+		else{
+			req.flash('error_msg','Unauthorized Attempt, Recorded');
+			res.redirect('/users/account');
 		}
 	})
 	.catch(err=>{
@@ -169,6 +176,7 @@ exports.updateBusinessPost = (req,res,next)=>{
     		return res.render('Business/editById',
     			{port:process.env.PORT,
     			errors:errors,industries:industries,
+    			title:'Update StartUp Info',
     			layout:req.user.role,card:business});
     	}
     	else{
@@ -187,7 +195,11 @@ exports.updateBusinessPost = (req,res,next)=>{
 				UserId : req.user.id,
 				IndustryId : req.body.industry_id
   				})
-    			.then(()=>{res.send('updated successfully')});
+    			.then(()=>{
+    				req.flash('error_msg','Updated Successfully');
+    				res.redirect('/users/account');
+
+    			});
     	}
 	})
 	.catch(err=>{next(err)})

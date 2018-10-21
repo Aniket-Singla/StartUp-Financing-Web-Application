@@ -13,7 +13,7 @@ exports.getInvestors = (req,res,next)=>{
     }})
   .then(investors=>{
     //console.log(investors)
-    res.render('Accounts/viewInvestors',{layout:req.user.role,port:process.env.PORT,investors:investors})
+    res.render('Accounts/viewInvestors',{layout:req.user.role,title:'Investors',port:process.env.PORT,investors:investors})
   })
   .catch(err=>{
     console.log(err)

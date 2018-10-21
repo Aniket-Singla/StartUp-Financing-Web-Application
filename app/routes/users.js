@@ -14,7 +14,7 @@ router.get('/createUser',passportConfig.alreadyLogged,userController.signupGet);
 router.post('/createUser',userController.createUser);
 router.get('/logout', userController.logoutUser);
 router.get('/account',passportConfig.isAuthenticated,(req,res)=>{
-	res.render('Accounts/'+req.user.role,{port:process.env.PORT,layout:req.user.role});
+	res.render('Accounts/'+req.user.role,{port:process.env.PORT,title:'User Home',layout:req.user.role});
 });
 router.get('/account/update',passportConfig.isAuthenticated,userController.updateUserGet);
 router.post('/account/update',passportConfig.isAuthenticated,userController.updateUserPost);

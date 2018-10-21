@@ -1,35 +1,14 @@
-{{!-- <header id="topnav-bar"class="fixed top-bar">
-        <div class="navbar-wrap">
-            <div class="site-logo">
-                <img id="logo" src="http://localhost:{{port}}/images/Example.png" height="50" width="50" alt="Startup Financing">
 
-            </div>
-           
-            <nav class="main-nav" id="topnav">
-                <a href="/">Home</a>
-                <a href="http://localhost:{{port}}/aboutUs">About Us</a>
-                <span id="user-loggedin" class="login">
-                    <a href="/users/logout">Sign-out</a>
-                </span>
-                <a href="javascript:void(0);" class="icon" onclick="topnavBurger()">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </nav>
-            
-        </div>
-    </header> --}}
-   
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
       <a class="navbar-brand" href="#">
-    <img src="http://localhost:{{port}}/images/Example.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <img src="/images/Example.png" width="30" height="30" class="d-inline-block align-top" alt="StartUp Financing">
     StartUp Financing
   </a>
       <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
+                        <span>Menu</span>
                     </button>
   
   
@@ -39,10 +18,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="http://localhost:{{port}}/aboutUs">About Us</a>
-      <a class="nav-item nav-link" href="http://localhost:{{port}}/users/logout">Sign Out</a>
-      {{!-- <a class="nav-item nav-link" href="http://localhost:{{port}}/users/createUser">Sign Up</a> --}}
-      {{!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> --}}
+      <a class="nav-item nav-link" href="/aboutUs">About Us</a>
+      <a class="nav-item nav-link" href="/users/logout">Sign Out</a>
+      
     </div>
   </div>
 </div>

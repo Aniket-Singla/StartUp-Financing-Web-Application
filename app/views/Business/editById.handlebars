@@ -10,7 +10,7 @@
   <div class="form-row">
     
     <div class="form-group col-md-12">
-      <label for="startup_name"><h5>Start_Up Name</h5></label>
+      <label for="startup_name"><h5>StartUp Name</h5></label>
       <input type="text" class="form-control" name="startup_name"  placeholder="StartUp Name" value={{card.startup_name}}>
     </div>
 
@@ -31,7 +31,7 @@
     <!--Business Type-->
     <div class="form-group col-md-12">
       <label for="Business Type"><h5>Business type</h5></label>
-      <select name="business_type" class="form-control">
+      <select name="business_type" id="business_type" class="form-control">
                            <option value="">Select Business Type</option>
                           <option value="1">Service</option>
                           <option value="2">Merchandising</option>
@@ -58,7 +58,7 @@
     <!-- Industry-->
   <div class="form-group col-md-12">
       <label for="industry_id"><h5>Industry</h5></label>
-    <select name="industry_id"  class="form-control">
+    <select name="industry_id" id="industry_id" class="form-control">
               <option value="">Select One</option>
                 {{#each industries}}
                 <option value="{{this.id}}">{{this.industryName}}</option>
@@ -136,5 +136,13 @@
   <textarea class="form-control" name="difference" rows="5" id="comment" placeholder="provide information on your competition and how you differentiate" >{{card.difference}}value={{card.difference}}</textarea>
 </div>
 <!-- Button-->
-<button type="submit" class="btn">Add</button>
+<button class="btn btn-primary" type="submit" class="btn">Update</button>
 </form>
+
+<script type="text/javascript">
+document.getElementById("monthpicker").getElementsByTagName('option')[{{card.startup_founding_month}}].selected = 'selected';
+document.getElementById("business_form").getElementsByTagName('option')[{{card.business_form}}].selected = 'selected';
+document.getElementById("business_type").getElementsByTagName('option')[{{card.business_type}}].selected = 'selected';
+document.getElementById("startup_stage").getElementsByTagName('option')[{{card.startup_stage}}].selected = 'selected';
+document.getElementById("industry_id").getElementsByTagName('option')[{{card.IndustryId}}].selected = 'selected';
+</script>

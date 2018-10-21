@@ -12,20 +12,20 @@ const User = db.Users;
  */
 
 exports.signupGet = (req, res) => {
-    res.render('signup',{port:process.env.PORT,title:"Create User",css: []});
+    res.render('signup',{port:process.env.PORT,title:"Create User",js:['main.js']});
 }
 exports.createUser = function(req,res,next){
  
-  req.checkBody('username','username cannot be empty').notEmpty();
+  req.checkBody('username','Minimum of 5 Characters are required for Username').notEmpty().isLength({ min: 5 });
   req.checkBody('email','email is required and must be valid EMail').notEmpty().isEmail();
-  req.checkBody('password','password cannot be empty').notEmpty();
+  req.checkBody('password','Password requires minimum Length of 5').notEmpty().isLength({ min: 5 });
   req.checkBody('fname','First name cannot be empty').notEmpty();
   req.checkBody('lname','Last name cannot be empty').notEmpty();
   req.checkBody('role','Please provide Your Role.').notEmpty();
-  req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
+  req.checkBody('contact','Please provide a valid contact no.').notEmpty().isMobilePhone();
   var errors =   req.validationErrors();
   if(errors){
-    return res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors})
+    return res.render('signup',{port:process.env.PORT,title:'Signup',errors:errors,js:['main.js']})
   }
   else{   
     var username = req.body.username;
@@ -64,7 +64,7 @@ exports.createUser = function(req,res,next){
                 })
             }
       console.log(err)
-      res.send('something went wrong')
+      next(err);
     })
  
   
@@ -114,24 +114,27 @@ exports.loginPost = (req, res, next) => {
 
 exports.updateUserGet = (req,res,next)=>{
 
-  res.render('Accounts/updateUser',{layout:req.user.role,port:process.env.PORT})
+  res.render('Accounts/updateUser',{layout:req.user.role,title:'Update User Info',port:process.env.PORT})
 
 }
 
 exports.updateUserPost = (req,res,next)=>{
   req.checkBody('fname','First name cannot be empty').notEmpty();
   req.checkBody('lname','Last name cannot be empty').notEmpty();
-  req.checkBody('contact','Please provide contact no.').notEmpty().isMobilePhone();
+  req.checkBody('contact','Please provide valid contact no.').notEmpty().isMobilePhone();
   var errors =   req.validationErrors();
   if(errors){
-    return res.render('Accounts/updateUser',{layout:req.user.role,port:process.env.PORT,errors:errors})
+    return res.render('Accounts/updateUser',{layout:req.user.role,title:'Update User',port:process.env.PORT,errors:errors})
   }
   User.findById(req.user.id)
   .then(user=>{
     user.update({first_name: req.body.fname,
                 last_name : req.body.lname,
                 contact_no : req.body.contact})
-    .then(()=>{res.send('credentials updated');})
+    .then(()=>{
+      req.flash('success_msg','Updated Successfully');
+      res.redirect('/users/account');
+    })
   })
   .catch(err=>{
     next(err)
@@ -149,7 +152,7 @@ exports.updateUserPost = (req,res,next)=>{
 */
 
 exports.deleteAccountGet = (req,res,next)=>{
-  res.render('Accounts/deleteAccount',{layout:req.user.role,port:process.env.PORT});
+  res.render('Accounts/deleteAccount',{layout:req.user.role,title:'Delete Account',port:process.env.PORT});
   //res.send('in delete')
 }
 
@@ -158,7 +161,8 @@ exports.deleteAccountPost = (req,res,next)=>{
   .then(user=>{
     user.destroy()
     .then(()=>{
-      res.send('user deleted')
+      req.flash('success_msg','User Was Successfully Deleted');
+      res.redirect('/');
     })
     .catch(err=>{
       console.log(err)
@@ -180,4 +184,14 @@ exports.logoutUser = function (req, res) {
   req.flash('success_msg', 'You are logged out');
 
   res.redirect('/users/login');
+}
+
+exports.isEntrepreneur = function(req,res,next){
+  if(req.user.role=='entrepreneur'){
+    return next();
+  }
+  else{
+    req.flash('error_msg', 'You are not authorized to access this page');
+    res.redirect('/users/account');
+  }
 }

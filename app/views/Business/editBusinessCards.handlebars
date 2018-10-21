@@ -1,14 +1,20 @@
 
-<ol>
-	<br>
 {{#each cards}}
-	<li>Name :{{this.startup_name}} <br>
-	Stage : {{this.startup_stage}} <br>
-	URL: {{this.startup_website_url}} <br>
-	Summary : {{this.startup_product_summary}} <br>
-	Team : {{this.startup_team_summary}}</li><br>
-    <a href="update/{{this.id}}"> Edit</a> 
+	<div class="card" style="width: 25rem;">
+  {{!-- <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap"> --}}
+  <div class="card-body">
+    <h5 class="card-title">{{this.startup_name}}</h5>
+    <p class="card-text">{{this.startup_product_summary}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{this.startup_team_summary}}</li>
+    <li class="list-group-item">{{this.difference}}</li>
+    <li class="list-group-item">{{this.startup_founding_year}}</li>
+  </ul>
+  <div class="card-body">
+    <a href="update/{{this.id}}" class="btn btn-primary" class="card-link">Edit</a>
+  </div>
+</div>
+<br>
 {{/each}}
-<br>
-<br>
-</ol>
+

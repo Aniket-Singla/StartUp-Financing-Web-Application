@@ -1,6 +1,7 @@
-body{
+.main{
 	
-      background-image : url("http://localhost:3000/images/404.jpg");
+      background-image : url("/images/404.jpg");
       background-repeat : no-repeat;
       background-size : 100%;
+      min-height: 100vh;
   }
