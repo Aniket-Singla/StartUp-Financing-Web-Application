@@ -18,7 +18,9 @@
 
     
     <link rel="shortcut icon" href="/images/custom.ico" type="image/x-icon" />
-    
+    {{#each css}}
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/{{this}}" />
+    {{/each}}
     
 </head>
 <!-- This webpage belongs to the signed in Entrepreneur -->

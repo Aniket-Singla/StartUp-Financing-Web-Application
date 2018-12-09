@@ -12,7 +12,6 @@ const flash = require('connect-flash');
 require('dotenv').config();
 const env = process.env.NODE_ENV || 'development';
 
-//var methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const db = require(path.join(__dirname,'app/models/index'));
@@ -130,15 +129,5 @@ app.use(function (err, req, res, next) {
   res.status(500).redirect('/500')
 })
 app.get('*',(req,res)=>{res.redirect('/404')});
-
-//app.use('/api',)
-// get requests
-
-
-// Import routes and give the server access to them
-//require('./controllers/burgers_controller.js')(app);
-
-// Syncing our sequelize models and then starting our express app in bin/ www
-
 
  module.exports = app;
